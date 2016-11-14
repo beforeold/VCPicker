@@ -1,9 +1,12 @@
 //
 //  VCPicker.m
-//  YunDiTrip
+
 //
 //  Created by ibeforeold on 16/3/24.
 //
+//also see the article 
+// [开发利器：控制器传送门（已通过半年使用和上线验证，附demo）](http://www.jianshu.com/p/60357c77a9ed)
+// [github](https://github.com/beforeold)
 
 #import "VCPicker.h"
 #import <objc/runtime.h>
