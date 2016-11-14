@@ -1086,7 +1086,7 @@ NSArray *ClassGetSubclasses(Class parentClass)
     [self swizzle_makeKeyAndVisiable];
     
     if (self == [VCPicker getMainWindow]) {
-        [VCPicker showFinderWithClassPrefix:nil];
+        [VCPicker showFinderWithClassPrefix:_prefixArray];
     }
 }
 
@@ -1094,7 +1094,7 @@ NSArray *ClassGetSubclasses(Class parentClass)
     [self swizzle_setRootViewController:rootViewController];
     
     if (self == [VCPicker getMainWindow]) {
-        [VCPicker showFinderWithClassPrefix:nil];
+        [VCPicker showFinderWithClassPrefix:_prefixArray];
     }
 }
 #endif
