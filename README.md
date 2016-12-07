@@ -1,4 +1,4 @@
-# TestVCPicker2
+# VCPicker
 
 Find and navi to your controller fast
 
@@ -83,7 +83,4 @@ TargetViewController *targetVC = [[TargetViewController alloc] init];
 ![类列表效果](http://upload-images.jianshu.io/upload_images/73339-adc420ddd7718458.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ![页面展示效果](http://upload-images.jianshu.io/upload_images/73339-d4707d87c372a718.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-# 4 demo
-[demo](https://github.com/beforeold/TestVCPicker2)
 
