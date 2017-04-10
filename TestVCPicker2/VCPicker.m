@@ -421,7 +421,7 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 };
 
 
-@interface GSVCPicker () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface VCPicker () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     /**
      *  temp searched results 临时搜索到的数组
