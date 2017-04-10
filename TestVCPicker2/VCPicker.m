@@ -440,7 +440,7 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 @end
 
 
-@implementation GSVCPicker
+@implementation VCPicker
 #pragma mark - Life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
