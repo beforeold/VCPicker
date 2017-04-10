@@ -1,12 +1,9 @@
 //
 //  VCPicker.h
-
+//  VCPicker
 //
-//  Created by ibeforeold on 16/3/24.
+//  Created by Brook on 16/3/24.
 //
-//also see the article 
-// [开发利器：控制器传送门（已通过半年使用和上线验证，附demo）](http://www.jianshu.com/p/60357c77a9ed)
-// [github](https://github.com/beforeold)
 
 #import <UIKit/UIKit.h>
 
@@ -17,17 +14,21 @@
  */
 @interface VCPicker : UIViewController
 
+
 /**
  *  activate VCPicker
  *  启用 VCPicker
  */
-+ (void)activateWhenDebug:(BOOL)needTitle;
++ (void)activateWhenDebug;
 
 /**
  *  activate for prefixes, more efficiently，启用 VCPicker，携带类前缀信息，查找工程内控制器的效率更高
  *
  *  @param prefixes class prefixes, can be nil 类前缀，可为nil
  */
-+ (void)activateWithClassPrefixesWhenDebug:(NSArray <NSString *> *)prefixes needTitle:(BOOL)needTitle;
++ (void)activateWithClassPrefixesWhenDebug:(NSArray <NSString *> *)prefixes;
+
+/// 显示 exceptArray 外的所有 prefix 的控制器
++ (void)activateWithClassPrefixesWhenDebug:(NSArray <NSString *> *)prefixes except:(NSArray *)exceptArray;
 
 @end
