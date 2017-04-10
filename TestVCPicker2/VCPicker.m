@@ -1086,16 +1086,16 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 - (void)swizzle_makeKeyAndVisiable {
     [self swizzle_makeKeyAndVisiable];
     
-    if (self == [GSVCPicker getMainWindow]) {
-        [GSVCPicker showFinderWithClassPrefix:_exceptArray except:_exceptArray];
+    if (self == [VCPicker getMainWindow]) {
+        [VCPicker showFinderWithClassPrefix:_exceptArray except:_exceptArray];
     }
 }
 
 - (void)swizzle_setRootViewController:(UIViewController *)rootViewController {
     [self swizzle_setRootViewController:rootViewController];
     
-    if (self == [GSVCPicker getMainWindow]) {
-        [GSVCPicker showFinderWithClassPrefix:_exceptArray except:_exceptArray];
+    if (self == [VCPicker getMainWindow]) {
+        [VCPicker showFinderWithClassPrefix:_exceptArray except:_exceptArray];
     }
 }
 #endif
