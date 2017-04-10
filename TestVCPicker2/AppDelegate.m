@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [VCPicker activateWithClassPrefixesWhenDebug:@[@"MY"] needTitle:NO];
+    [VCPicker activateWithClassPrefixesWhenDebug:@[@"MY"]];
     
     return YES;
 }
