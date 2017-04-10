@@ -1,21 +1,16 @@
 //
 //  VCPicker.m
-
+//  VCPicker
 //
-//  Created by ibeforeold on 16/3/24.
+//  Created by Brook on 16/3/24.
 //
-//also see the article 
-// [开发利器：控制器传送门（已通过半年使用和上线验证，附demo）](http://www.jianshu.com/p/60357c77a9ed)
-// [github](https://github.com/beforeold)
 
 #import "VCPicker.h"
 #import <objc/runtime.h>
 
-#define UserDefaults [NSUserDefaults standardUserDefaults]
-
 #pragma mark - FloatingView
 
-static const CGFloat kDownLoadWidth = 60;
+static const CGFloat kDownLoadWidth = 60.f;
 static const CGFloat kOffSet = 0.5*kDownLoadWidth;
 typedef void (^FloatingBlock) ();
 
@@ -26,21 +21,21 @@ typedef void (^FloatingBlock) ();
 @property (nonatomic, strong) UIView *backgroundView;//背景视图
 @property (nonatomic, strong) UIImageView *imageView;//图片视图
 @property (nonatomic, strong) UIDynamicAnimator *animator;//物理仿真动画
-@property (nonatomic,   copy) FloatingBlock floatingBlock;
+@property (nonatomic, copy) FloatingBlock floatingBlock;
 
 @end
 
 @implementation FloatingView
 // 初始化
 - (instancetype)initWithFrame:(CGRect)frame{
-    
     frame.size.width = kDownLoadWidth;
-    
     frame.size.height = kDownLoadWidth;
-    
     if (self = [super initWithFrame:frame]) {
         //初始化背景视图
-        _backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
+        _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0,
+                                                                  0,
+                                                                  CGRectGetWidth(self.frame),
+                                                                  CGRectGetHeight(self.frame))];
         _backgroundView.layer.cornerRadius = _backgroundView.frame.size.width / 2;
         _backgroundView.clipsToBounds = YES;
         _backgroundView.backgroundColor = [UIColor colorWithRed:35/255.0 green:167/255.0 blue:67/255.0 alpha:1];
@@ -48,7 +43,9 @@ typedef void (^FloatingBlock) ();
         [self addSubview:_backgroundView];
         
         //初始化图片背景视图
-        UIView * imageBackgroundView = [[UIView alloc]initWithFrame:CGRectMake(5, 5, CGRectGetWidth(self.frame) - 10, CGRectGetHeight(self.frame) - 10)];
+        UIView * imageBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(5, 5,
+                                                                               CGRectGetWidth(self.frame) - 10,
+                                                                               CGRectGetHeight(self.frame) - 10)];
         imageBackgroundView.layer.cornerRadius = imageBackgroundView.frame.size.width / 2;
         imageBackgroundView.clipsToBounds = YES;
         imageBackgroundView.backgroundColor = [UIColor colorWithRed:35/255.0 green:167/255.0 blue:67/255.0 alpha:1];
@@ -56,8 +53,9 @@ typedef void (^FloatingBlock) ();
         imageBackgroundView.alpha = 0.7;
         [self addSubview:imageBackgroundView];
         //初始化图片
-        
-        _imageView = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"icon_tempMarkup"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        UIImage *image = [[UIImage imageNamed:@"icon_tempMarkup"]
+                                   imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        _imageView = [[UIImageView alloc] initWithImage:image];
         _imageView.tintColor = [UIColor whiteColor];
         _imageView.frame = CGRectMake(0, 0, 30, 30);
         _imageView.center = CGPointMake(kDownLoadWidth / 2 , kDownLoadWidth / 2);
@@ -66,17 +64,14 @@ typedef void (^FloatingBlock) ();
         self.layer.cornerRadius = kDownLoadWidth / 2;
         self.alpha = 0.7;
         //开启呼吸动画
-        [self HighlightAnimation];
+        [self highlightAnimation];
     }
     
     return self;
-    
 }
-
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     //得到触摸点
-    
     UITouch *startTouch = [touches anyObject];
     //返回触摸点坐标
     self.startPoint = [startTouch locationInView:self.superview];
@@ -100,7 +95,11 @@ typedef void (^FloatingBlock) ();
     self.endPoint = [endTouch locationInView:self.superview];
     //判断是否移动了视图 (误差范围5)
     CGFloat errorRange = 5;
-    if (( self.endPoint.x - self.startPoint.x >= -errorRange && self.endPoint.x - self.startPoint.x <= errorRange ) && ( self.endPoint.y - self.startPoint.y >= -errorRange && self.endPoint.y - self.startPoint.y <= errorRange )) {
+    if (( self.endPoint.x - self.startPoint.x >= -errorRange &&
+         self.endPoint.x - self.startPoint.x <= errorRange ) &&
+        ( self.endPoint.y - self.startPoint.y >= -errorRange &&
+         self.endPoint.y - self.startPoint.y <= errorRange ))
+    {
         //未移动
         //调用打开下载视图控制器方法
         //Bob-> 打开控制器
@@ -151,7 +150,8 @@ typedef void (^FloatingBlock) ();
         }
         
         //添加吸附物理行为
-        UIAttachmentBehavior *attachmentBehavior = [[UIAttachmentBehavior alloc] initWithItem:self attachedToAnchor:minPoint];
+        UIAttachmentBehavior *attachmentBehavior = [[UIAttachmentBehavior alloc] initWithItem:self
+                                                                             attachedToAnchor:minPoint];
         [attachmentBehavior setLength:0];
         [attachmentBehavior setDamping:0.1];
         [attachmentBehavior setFrequency:5];
@@ -176,23 +176,28 @@ typedef void (^FloatingBlock) ();
 }
 
 // BreathingAnimation 呼吸动画
-- (void)HighlightAnimation {
-    __block typeof(self) Self = self;
-    [UIView animateWithDuration:1.5f animations:^{
-        Self.backgroundView.backgroundColor = [Self.backgroundView.backgroundColor colorWithAlphaComponent:0.1f];
-        
-    } completion:^(BOOL finished) {
-        [Self DarkAnimation];
-    }];
+- (void)highlightAnimation {
+    [UIView animateWithDuration:1.5f
+                     animations:^
+     {
+         self.backgroundView.backgroundColor = [self.backgroundView.backgroundColor colorWithAlphaComponent:0.1f];
+     }
+                     completion:^(BOOL finished)
+     {
+         [self highlightAnimation];
+     }];
 }
 
-- (void)DarkAnimation{
-    __block typeof(self) Self = self;
-    [UIView animateWithDuration:1.5f animations:^{
-        Self.backgroundView.backgroundColor = [Self.backgroundView.backgroundColor colorWithAlphaComponent:0.6f];
-    } completion:^(BOOL finished) {
-        [Self HighlightAnimation];
-    }];
+- (void)darkAnimation{
+    [UIView animateWithDuration:1.5f
+                     animations:^
+     {
+         self.backgroundView.backgroundColor = [self.backgroundView.backgroundColor colorWithAlphaComponent:0.6f];
+     }
+                     completion:^(BOOL finished)
+     {
+         [self highlightAnimation];
+     }];
 }
 
 @end
@@ -248,17 +253,32 @@ static NSString *const kErrorKey = @"kErrorKey";
     CGFloat heightRatio = 0.75;
     CGFloat errorLabelWidth = 20;
 
-    self.presentButton.frame = CGRectMake(horizontalMarigin, buttonVerticalMargin, buttonWidth, CGRectGetHeight(self.contentView.frame) - 2*buttonVerticalMargin);
-    self.presentNaviButton.frame = CGRectMake(CGRectGetMaxX(self.presentButton.frame) + buttonPadding, buttonVerticalMargin, presentNaviWidth, CGRectGetHeight(self.contentView.frame) - 2*buttonVerticalMargin);
+    self.presentButton.frame = CGRectMake(horizontalMarigin,
+                                          buttonVerticalMargin,
+                                          buttonWidth,
+                                          CGRectGetHeight(self.contentView.frame) - 2*buttonVerticalMargin);
+    self.presentNaviButton.frame = CGRectMake(CGRectGetMaxX(self.presentButton.frame) + buttonPadding,
+                                              buttonVerticalMargin,
+                                              presentNaviWidth,
+                                              CGRectGetHeight(self.contentView.frame) - 2*buttonVerticalMargin);
     
-    self.errorLabel.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - horizontalMarigin - errorLabelWidth, (CGRectGetHeight(self.contentView.frame) - errorLabelWidth) *0.5, errorLabelWidth, errorLabelWidth);
+    self.errorLabel.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - horizontalMarigin - errorLabelWidth,
+                                       (CGRectGetHeight(self.contentView.frame) - errorLabelWidth) *0.5,
+                                       errorLabelWidth,
+                                       errorLabelWidth);
     self.errorLabel.layer.cornerRadius = 0.5*errorLabelWidth;
     
     CGFloat titleX = CGRectGetMaxX(self.presentNaviButton.frame) + buttonPadding;
     CGFloat titleWidth = CGRectGetMinX(self.errorLabel.frame) - buttonPadding - titleX;
-    self.titleLabel.frame = CGRectMake(titleX, 0, titleWidth, self.contentView.frame.size.height*heightRatio);
+    self.titleLabel.frame = CGRectMake(titleX,
+                                       0,
+                                       titleWidth,
+                                       self.contentView.frame.size.height*heightRatio);
     
-    self.detailLabel.frame = CGRectMake(CGRectGetMinX(self.titleLabel.frame), CGRectGetMaxY(self.titleLabel.frame), CGRectGetWidth(self.titleLabel.frame), (1-heightRatio)*self.contentView.frame.size.height);
+    self.detailLabel.frame = CGRectMake(CGRectGetMinX(self.titleLabel.frame),
+                                        CGRectGetMaxY(self.titleLabel.frame),
+                                        CGRectGetWidth(self.titleLabel.frame),
+                                        (1-heightRatio)*self.contentView.frame.size.height);
 }
 
 - (void)updateUIWithModel:(NSDictionary *)classInfo {
@@ -271,7 +291,8 @@ static NSString *const kErrorKey = @"kErrorKey";
     self.titleLabel.text = classTitle;
     self.detailLabel.text = className;
     self.errorLabel.text = classError ? @"i" : @">";
-    self.errorLabel.backgroundColor = classError ? [UIColor colorWithRed:255/255.0 green:70/255.0 blue:1/255.0 alpha:1] : [UIColor whiteColor];
+    UIColor *errorColor = [UIColor colorWithRed:255/255.0 green:70/255.0 blue:1/255.0 alpha:1];
+    self.errorLabel.layer.backgroundColor = classError ? errorColor.CGColor : [UIColor whiteColor].CGColor;
     self.errorLabel.textColor = classError ? [UIColor whiteColor] : [UIColor grayColor];
 }
 
@@ -279,7 +300,7 @@ static NSString *const kErrorKey = @"kErrorKey";
     if (!_presentButton) {
         _presentButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _presentButton.titleLabel.font = [UIFont systemFontOfSize:11];
-        _presentButton.backgroundColor = [UIColor colorWithRed:35/255.0 green:167/255.0 blue:67/255.0 alpha:1];//[UIColor colorWithRed:255/255.0 green:70/255.0 blue:1/255.0 alpha:1]
+        _presentButton.backgroundColor = [UIColor colorWithRed:35/255.0 green:167/255.0 blue:67/255.0 alpha:1];
         _presentButton.layer.cornerRadius = 5.0;
         [_presentButton addTarget:self action:@selector(presentClick:) forControlEvents:UIControlEventTouchUpInside];
         [_presentButton setTitle:@"Pres" forState:UIControlStateNormal];
@@ -328,9 +349,9 @@ static NSString *const kErrorKey = @"kErrorKey";
         _errorLabel.numberOfLines = 0;
         _errorLabel.font = [UIFont systemFontOfSize:15];
         _errorLabel.textAlignment = NSTextAlignmentCenter;
-        _errorLabel.layer.masksToBounds = YES;
         _errorLabel.userInteractionEnabled = YES;
-        [_errorLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(errorClick:)]];
+        [_errorLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                  action:@selector(errorClick:)]];
     }
     return _errorLabel;
 }
@@ -349,7 +370,11 @@ static NSString *const kErrorKey = @"kErrorKey";
 
 - (void)errorClick:(UITapGestureRecognizer *)tap {
     if (self.model[kErrorKey]) {
-        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"ErrorClass %@ - %@", self.model[kTitleKey], self.model[kNameKey]] message:self.model[kErrorKey] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        NSString *title = [NSString stringWithFormat:@"ErrorClass %@ - %@", self.model[kTitleKey], self.model[kNameKey]];
+        [[[UIAlertView alloc] initWithTitle:title
+                                    message:self.model[kErrorKey]
+                                   delegate:nil
+                          cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     }
 }
 
@@ -367,6 +392,8 @@ static FloatingView *_floatingView = nil;
  *  class prefixes array 类名前缀
  */
 static NSArray *_prefixArray = nil;
+
+static NSArray *_exceptArray = nil;
 
 /**
  *  has floating view shown 悬浮球是否已经显示
@@ -386,9 +413,6 @@ static NSArray *_finalArray = nil;
 
 static NSString *const kSearchHistoryKey = @"searchHistoryKey";
 
-/// need a title for a viewcontroller 是否需要title
-static BOOL _needTitle = NO;
-
 
 typedef NS_ENUM(NSInteger, VCShowType) {
     VCShowTypePush,
@@ -397,8 +421,7 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 };
 
 
-
-@interface VCPicker () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface GSVCPicker () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     /**
      *  temp searched results 临时搜索到的数组
@@ -417,7 +440,7 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 @end
 
 
-@implementation VCPicker
+@implementation GSVCPicker
 #pragma mark - Life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -426,7 +449,7 @@ typedef NS_ENUM(NSInteger, VCShowType) {
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
-    searchBar.placeholder = @"Search";
+    searchBar.placeholder = NSLocalizedString(@"Search", nil);
     searchBar.delegate = self;
     self.navigationItem.titleView = searchBar;
     
@@ -438,14 +461,9 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 
 // view appear to find all controllers
 - (void)viewDidAppear:(BOOL)animated {
-    
     [super viewDidAppear:animated];
     
-    [self findControllers];
-    
-    // UISearchBar *searchBar = (UISearchBar *)self.navigationItem.titleView;
-    // [searchBar becomeFirstResponder];
-    
+    [self findAndShowControllers];
     [[self class] setCircleHidden:YES];
 }
 
@@ -465,16 +483,22 @@ typedef NS_ENUM(NSInteger, VCShowType) {
     CGFloat buttonHeight = 40;
     CGFloat padding = 10;
     
-    self.cancelButton.frame = CGRectMake(padding, CGRectGetHeight(self.view.bounds) - padding - buttonHeight, CGRectGetWidth(self.view.bounds) - 2*padding, buttonHeight);
+    self.cancelButton.frame = CGRectMake(padding,
+                                         CGRectGetHeight(self.view.bounds) - padding - buttonHeight,
+                                         CGRectGetWidth(self.view.bounds) - 2*padding,
+                                         buttonHeight);
     
-    self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.cancelButton.frame) - padding);
+    self.tableView.frame = CGRectMake(0,
+                                      0,
+                                      CGRectGetWidth(self.view.bounds),
+                                      CGRectGetMinY(self.cancelButton.frame) - padding);
 }
 
 /**
  *  load history data 加载历史数据
  */
 - (void)loadHistoryData {
-    _historyArray = [UserDefaults objectForKey:kSearchHistoryKey];
+    _historyArray = [[NSUserDefaults standardUserDefaults] objectForKey:kSearchHistoryKey];
     if (_historyArray) {
         _historyArray = [_historyArray mutableCopy];
         
@@ -502,7 +526,7 @@ typedef NS_ENUM(NSInteger, VCShowType) {
         [_historyArray replaceObjectsAtIndexes:replaceSet withObjects:replaceArray];
         [_historyArray replaceObjectsAtIndexes:copySet withObjects:copyArray];
         
-    }else {
+    } else {
         _historyArray = [NSMutableArray array];
     }
 }
@@ -542,14 +566,14 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 }
 
 /**
- *  find all viewcontroller in this project
+ *  find and show all viewcontroller in this project
  *  \nNote: there are some UI classes can not be handled async
  *  \nNote: some special classes can't conform to NSObject protocol, so avoid them
  *  \nNote获取工程中所有的ViewController
  *  \nNote注意，这里还是不要用异步处理了，系统有少量UI类异步处理会报线程错误
  *  \nNote另外，部分特殊类不支持NSObject协议，需要手动剔除
  */
-- (void)findControllers {
+- (void)findAndShowControllers {
     if (!_finalArray) {
         NSArray *classNameArray = [self findViewControllers];
         NSMutableArray *array = [NSMutableArray array];
@@ -558,10 +582,8 @@ typedef NS_ENUM(NSInteger, VCShowType) {
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             
             @try {
-                if (_needTitle) {
-                    controller = [[NSClassFromString(className) alloc] init]; // nil
-                    [controller view]; // to active viewDidLoad so we can get conroller.title
-                }
+                controller = [[NSClassFromString(className) alloc] init]; // nil
+                 [controller view]; // to active viewDidLoad so we can get conroller.title
                 
             } @catch (NSException *exception) {
                 NSLog(@"[VCPicker <%@> exception: %@]", className, exception);
@@ -569,7 +591,9 @@ typedef NS_ENUM(NSInteger, VCShowType) {
                 
             } @finally {
                 dic[kNameKey] = className;
-                dic[kTitleKey] = controller.title ?: (controller.navigationItem.title ?: (controller.tabBarItem.title ?: className));
+                NSString *title = nil;
+                title = controller.title ?: (controller.navigationItem.title ?: (controller.tabBarItem.title ?: className));
+                dic[kTitleKey] = title;
                 [self refreshHistoryForControllerInfo:dic];
                 [array addObject:dic];
             }
@@ -597,7 +621,6 @@ typedef NS_ENUM(NSInteger, VCShowType) {
             break;
         }
     }
-    
 }
 
 /**
@@ -620,7 +643,6 @@ typedef NS_ENUM(NSInteger, VCShowType) {
     }
     
     [_historyArray removeObjectsAtIndexes:indexSet];
-
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
@@ -666,7 +688,10 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 }
 
 //edit history
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView
+        commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+        forRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [_historyArray removeObjectAtIndex:indexPath.row];
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
     
@@ -674,8 +699,7 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 }
 
 - (void)synchronizeHistory {
-    [UserDefaults setObject:_historyArray forKey:kSearchHistoryKey];
-    [UserDefaults synchronize];
+    [[NSUserDefaults standardUserDefaults] setObject:_historyArray forKey:kSearchHistoryKey];
 }
 
 
@@ -712,6 +736,10 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 
 // add one history record, the same one will be avoied
 - (void)addHistoryRecord:(NSDictionary *)dic {
+    if (dic[kErrorKey]) {
+        return;
+    }
+    
     NSInteger index = NSNotFound;
     for (NSMutableDictionary *history in _historyArray) {
         if ([dic[kNameKey] isEqualToString:history[kNameKey]]) {
@@ -762,15 +790,17 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 
 #pragma mark - Picker
 
-+ (void)activateWhenDebug:(BOOL)needTitle {
-    [self activateWithClassPrefixesWhenDebug:nil needTitle:needTitle];
++ (void)activateWhenDebug {
+    [self activateWithClassPrefixesWhenDebug:nil except:nil];
 }
 
-+ (void)activateWithClassPrefixesWhenDebug:(NSArray *)prefixes needTitle:(BOOL)needTitle {
++ (void)activateWithClassPrefixesWhenDebug:(NSArray <NSString *> *)prefixes {
+    [self activateWithClassPrefixesWhenDebug:prefixes except:nil];
+}
+
++ (void)activateWithClassPrefixesWhenDebug:(NSArray *)prefixes except:(NSArray *)exceptArray {
     _isActivated = YES;
-    _needTitle = needTitle;
-    
-    [self showFinderWithClassPrefix:prefixes];
+    [self showFinderWithClassPrefix:prefixes except:exceptArray];
 }
 
 /**
@@ -778,15 +808,19 @@ typedef NS_ENUM(NSInteger, VCShowType) {
  *
  *  @param prefixArray 前缀数组，比如 @[@"AB",@"ABC"]，可为nil
  */
-+ (void)showFinderWithClassPrefix:(NSArray<NSString *> *)prefixArray {
++ (void)showFinderWithClassPrefix:(NSArray<NSString *> *)prefixArray except:(NSArray *)exceptArray {
 #ifdef DEBUG
     if (_isActivated) {
         UIWindow *keyWindow = [self getMainWindow];
         if(!_hasShown && keyWindow) {
             _hasShown = YES;
             _prefixArray = prefixArray;
+            _exceptArray = exceptArray;
             
-            _floatingView = [[FloatingView alloc] initWithFrame:CGRectMake(CGRectGetWidth(keyWindow.frame) - 80 , keyWindow.frame.size.height - 190, 60, 60)];
+            _floatingView = [[FloatingView alloc] initWithFrame:CGRectMake(CGRectGetWidth(keyWindow.frame) - 80 ,
+                                                                           keyWindow.frame.size.height - 190,
+                                                                           60,
+                                                                           60)];
             _floatingView.backgroundColor = [UIColor clearColor];
             _floatingView.floatingBlock = ^{
                 [self setCircleHidden:YES];
@@ -839,7 +873,6 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 /**
  *  show some Controller 显示控制器页面
  *
- *  @param controller target controller 目标控制器
  *  @param showType 显示类型
  */
 - (void)showViewController:(NSString *)controllerName showType:(VCShowType)showType
@@ -878,7 +911,10 @@ typedef NS_ENUM(NSInteger, VCShowType) {
             
         case VCShowTypePresentNavi: {
             UIViewController *rootVC = [[self class] getMainWindow].rootViewController;
-            controller.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissController)];
+            UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                  target:self
+                                                                                  action:@selector(dismissController)];
+            controller.navigationItem.leftBarButtonItem = left;
             UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:controller];
             [rootVC presentViewController:naviVC animated:YES completion:nil];
             break;
@@ -887,7 +923,8 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 }
 
 /**
- *  查找工程内的所有相关ViewController
+ *  查找工程内的所有相关ViewController，浙江
+ *  find all viewcontrollers, this will block the main thread
  *
  *  @return 控制器名字数组
  */
@@ -909,7 +946,14 @@ typedef NS_ENUM(NSInteger, VCShowType) {
                     NSString *className = [NSString stringWithUTF8String:class_getName(theClass)];
                     if ([className hasPrefix:classPrefix]) {
                         if ([theClass isSubclassOfClass:[UIViewController class]]) {
-                            [unSortedArray addObject:className];
+                            BOOL isExcept = NO;
+                            for (NSString *except in _exceptArray) {
+                                if ([className containsString:except]) {
+                                    isExcept = YES;
+                                    break;
+                                }
+                            }
+                            if (!isExcept) [unSortedArray addObject:className];
                         }
                     }
                 }
@@ -932,6 +976,16 @@ typedef NS_ENUM(NSInteger, VCShowType) {
                 if ([className hasPrefix:@"SSDK"]) continue; // Messag
                 if ([className hasPrefix:@"SSP"]) continue; //
                 if ([className hasPrefix:@"QL"]) continue; // AIRPlay
+                if ([className hasPrefix:@"GSAuto"]) continue; // GS AutoMap
+                
+                BOOL isExcept = NO;
+                for (NSString *except in _exceptArray) {
+                    if ([className containsString:except]) {
+                        isExcept = YES;
+                        break;
+                    }
+                }
+                if (isExcept) continue;
                 
                 if ([self isSpecialClass:className]) continue;
                 
@@ -974,7 +1028,14 @@ typedef NS_ENUM(NSInteger, VCShowType) {
  *
  */
 - (NSArray *)specialClassArray {
-    return @[@"JSExport", @"__NSMessageBuilder", @"Object", @"__ARCLite__", @"__NSAtom", @"__NSGenericDeallocHandler", @"_NSZombie_", @"CLTilesManagerClient", @"FigIrisAutoTrimmerMotionSampleExport", @"CNZombie", @"_CNZombie_", @"ABContactViewController", @"ABLabelPickerViewController", @"ABStarkContactViewController", @"CNContactContentViewController", @"CNContactViewServiceViewController", @"CNStarkContactViewController", @"MKActivityViewController", @"MKPlaceInfoViewController",@"CNUI", @"UISearchController"]; // UI的类在子线程访问有问题
+    return @[@"JSExport", @"__NSMessageBuilder", @"Object", @"__ARCLite__", @"__NSAtom",
+             @"__NSGenericDeallocHandler", @"_NSZombie_", @"CLTilesManagerClient",
+             @"FigIrisAutoTrimmerMotionSampleExport", @"CNZombie", @"_CNZombie_",
+             @"ABContactViewController", @"ABLabelPickerViewController",
+             @"ABStarkContactViewController", @"CNContactContentViewController",
+             @"CNContactViewServiceViewController", @"CNStarkContactViewController",
+             @"MKActivityViewController", @"MKPlaceInfoViewController",
+             @"CNUI", @"UISearchController"]; // UI的类在子线程访问有问题
 }
 
 /**
@@ -999,66 +1060,6 @@ typedef NS_ENUM(NSInteger, VCShowType) {
     
     return [self getRootClassOfClass:superClass];
 }
-
-NSArray *ClassGetSubclasses(Class parentClass)
-{
-    int numClasses = objc_getClassList(NULL, 0);
-    Class *classes = NULL;
-    
-    classes =  (__unsafe_unretained Class *)malloc(sizeof(Class) * numClasses);
-    numClasses = objc_getClassList(classes, numClasses);
-    
-    
-    NSMutableArray *result = [NSMutableArray array];
-    for (NSInteger i = 0; i < numClasses; i++)
-    {
-        Class superClass = classes[i];
-        do
-        {
-            superClass = class_getSuperclass(superClass);
-        } while(superClass && superClass != parentClass);
-        
-        if (superClass == nil)
-        {
-            continue;
-        }
-        
-        [result addObject:classes[i]];
-    }
-    
-    free(classes);
-    return result;
-}
-// check method again when use
--(NSArray *)getSubClass:(Class ) parentClass{
-    int numClasses = objc_getClassList(NULL, 0);
-    Class *classes = NULL;
-    
-    classes =  (__unsafe_unretained Class *)malloc(sizeof(Class) * numClasses);
-    numClasses = objc_getClassList(classes, numClasses);
-    
-    NSMutableArray *result = [NSMutableArray array];
-    for (NSInteger i = 0; i < numClasses; i++)
-    {
-        Class superClass = classes[i];
-        do
-        {
-            superClass = class_getSuperclass(superClass);
-        } while(superClass && superClass != parentClass);
-        
-        if (superClass == nil)
-        {
-            continue;
-        }
-        
-        [result addObject:classes[i]];
-    }
-    
-    free(classes);
-    
-    return result;
-}
-
 
 @end
 
@@ -1085,19 +1086,21 @@ NSArray *ClassGetSubclasses(Class parentClass)
 - (void)swizzle_makeKeyAndVisiable {
     [self swizzle_makeKeyAndVisiable];
     
-    if (self == [VCPicker getMainWindow]) {
-        [VCPicker showFinderWithClassPrefix:_prefixArray];
+    if (self == [GSVCPicker getMainWindow]) {
+        [GSVCPicker showFinderWithClassPrefix:_exceptArray except:_exceptArray];
     }
 }
 
 - (void)swizzle_setRootViewController:(UIViewController *)rootViewController {
     [self swizzle_setRootViewController:rootViewController];
     
-    if (self == [VCPicker getMainWindow]) {
-        [VCPicker showFinderWithClassPrefix:_prefixArray];
+    if (self == [GSVCPicker getMainWindow]) {
+        [GSVCPicker showFinderWithClassPrefix:_exceptArray except:_exceptArray];
     }
 }
 #endif
 
 @end
+
+
 
