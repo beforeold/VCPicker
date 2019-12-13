@@ -3,7 +3,7 @@
 //  TestVCPicker2
 //
 //  Created by 席萍萍 on 2016/11/10.
-//  Copyright © 2016年 Yundi. All rights reserved.
+//  Copyright © 2016年 Brook. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -19,7 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [VCPicker activateWithClassPrefixesWhenDebug:@[@"MY"]];
+    // [VCPicker activateWithClassPrefixesWhenDebug:@[@"MY"]];
+    [VCPicker activateWhenDebugWithClassPrefixes:@[@"MY"]];
     
     return YES;
 }

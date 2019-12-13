@@ -1,3 +1,8 @@
+
+
+> 如需运行 demo，可直接 clone 或下载后打开 TestVCPicker2 工程
+
+
 # VCPicker
 
 Find and navi to your controller fast
