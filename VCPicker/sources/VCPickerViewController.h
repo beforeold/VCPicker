@@ -1,8 +1,8 @@
 //
-//  VCPicker.h
+//  VCPickerViewController.h
 //  VCPicker
 //
-//  Created by Brook on 16/3/24.
+//  Created by beforeold on 16/3/24.
 //
 
 #import <UIKit/UIKit.h>
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  用此类搜索和选择你想要跳转的控制器
  *
  */
-@interface VCPicker : UIViewController
+@interface VCPickerViewController : UIViewController
 
 
 /**

@@ -2,12 +2,12 @@
 //  AppDelegate.m
 //  TestVCPicker2
 //
-//  Created by 席萍萍 on 2016/11/10.
+//  Created by beforeold on 2016/11/10.
 //  Copyright © 2016年 Brook. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "VCPicker.h"
+#import "VCPickerViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,8 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    // [VCPicker activateWithClassPrefixesWhenDebug:@[@"MY"]];
-    [VCPicker activateWhenDebugWithClassPrefixes:@[@"MY"]];
+    // [VCPickerViewController activateWithClassPrefixesWhenDebug:@[@"MY"]];
+    [VCPickerViewController activateWhenDebugWithClassPrefixes:@[@"MY"]];
     
     return YES;
 }

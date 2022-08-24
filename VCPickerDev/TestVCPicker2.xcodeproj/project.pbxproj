@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		94C2846528B693AD00DA9C4E /* VCPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C2846428B693AD00DA9C4E /* VCPicker.m */; };
+		94C2846528B693AD00DA9C4E /* VCPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C2846428B693AD00DA9C4E /* VCPickerViewController.m */; };
 		BCDB7B7C1DD41F82000E4030 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDB7B7B1DD41F82000E4030 /* main.m */; };
 		BCDB7B7F1DD41F82000E4030 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDB7B7E1DD41F82000E4030 /* AppDelegate.m */; };
 		BCDB7B821DD41F82000E4030 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDB7B811DD41F82000E4030 /* ViewController.m */; };
@@ -18,8 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		94C2846328B693AD00DA9C4E /* VCPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCPicker.h; sourceTree = "<group>"; };
-		94C2846428B693AD00DA9C4E /* VCPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCPicker.m; sourceTree = "<group>"; };
+		94C2846328B693AD00DA9C4E /* VCPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCPickerViewController.h; sourceTree = "<group>"; };
+		94C2846428B693AD00DA9C4E /* VCPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCPickerViewController.m; sourceTree = "<group>"; };
+		94C2846628B6943300DA9C4E /* VCPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCPicker.h; sourceTree = "<group>"; };
 		BCDB7B771DD41F82000E4030 /* TestVCPicker2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestVCPicker2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCDB7B7B1DD41F82000E4030 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BCDB7B7D1DD41F82000E4030 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -48,6 +49,7 @@
 		94C2846128B693AD00DA9C4E /* VCPicker */ = {
 			isa = PBXGroup;
 			children = (
+				94C2846628B6943300DA9C4E /* VCPicker.h */,
 				94C2846228B693AD00DA9C4E /* sources */,
 			);
 			name = VCPicker;
@@ -57,8 +59,8 @@
 		94C2846228B693AD00DA9C4E /* sources */ = {
 			isa = PBXGroup;
 			children = (
-				94C2846328B693AD00DA9C4E /* VCPicker.h */,
-				94C2846428B693AD00DA9C4E /* VCPicker.m */,
+				94C2846328B693AD00DA9C4E /* VCPickerViewController.h */,
+				94C2846428B693AD00DA9C4E /* VCPickerViewController.m */,
 			);
 			path = sources;
 			sourceTree = "<group>";
@@ -132,8 +134,9 @@
 		BCDB7B6F1DD41F82000E4030 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = VCPicker;
 				LastUpgradeCheck = 1340;
-				ORGANIZATIONNAME = Yundi;
+				ORGANIZATIONNAME = beforeold;
 				TargetAttributes = {
 					BCDB7B761DD41F82000E4030 = {
 						CreatedOnToolsVersion = 8.1;
@@ -178,7 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94C2846528B693AD00DA9C4E /* VCPicker.m in Sources */,
+				94C2846528B693AD00DA9C4E /* VCPickerViewController.m in Sources */,
 				BCDB7B821DD41F82000E4030 /* ViewController.m in Sources */,
 				BCDB7B7F1DD41F82000E4030 /* AppDelegate.m in Sources */,
 				BCDB7B7C1DD41F82000E4030 /* main.m in Sources */,
@@ -322,7 +325,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = WS8S43M437;
 				INFOPLIST_FILE = TestVCPicker2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.br.vcpicker.example;
@@ -336,7 +339,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = WS8S43M437;
 				INFOPLIST_FILE = TestVCPicker2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.br.vcpicker.example;

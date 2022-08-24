@@ -2,7 +2,7 @@
 //  main.m
 //  TestVCPicker2
 //
-//  Created by 席萍萍 on 2016/11/10.
+//  Created by beforeold on 2016/11/10.
 //  Copyright © 2016年 Brook. All rights reserved.
 //
 

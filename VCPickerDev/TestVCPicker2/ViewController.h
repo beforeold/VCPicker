@@ -2,7 +2,7 @@
 //  ViewController.h
 //  TestVCPicker2
 //
-//  Created by ibeforeold on 2016/11/10.
+//  Created by beforeold on 2016/11/10.
 //
 
 #import <UIKit/UIKit.h>

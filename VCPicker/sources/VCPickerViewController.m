@@ -1,11 +1,11 @@
 //
-//  VCPicker.m
+//  VCPickerViewController.m
 //  VCPicker
 //
-//  Created by Brook on 16/3/24.
+//  Created by beforeold on 16/3/24.
 //
 
-#import "VCPicker.h"
+#import "VCPickerViewController.h"
 #import <objc/runtime.h>
 
 #pragma mark - FloatingView
@@ -15,13 +15,13 @@
 static const CGFloat kFloatingLength = 30.0;
 static const CGFloat kScreenPadding = 0.5 * kFloatingLength;
 
-typedef NS_ENUM(NSInteger, VCShowType) {
-    VCShowTypePresentNavi, // 默认用一个导航控制器 present 出来
-    VCShowTypePresent, // 直接 present
-    VCShowTypePush, // 在当前业务页面向前 push
+typedef NS_ENUM(NSInteger, VCPickerShowType) {
+    VCPickerShowTypePresentNavi, // 默认用一个导航控制器 present 出来
+    VCPickerShowTypePresent, // 直接 present
+    VCPickerShowTypePush, // 在当前业务页面向前 push
 };
 
-@interface FloatingView : UIView <UIDynamicAnimatorDelegate>
+@interface VCPickerFloatingView : UIView <UIDynamicAnimatorDelegate>
 
 @property (nonatomic, assign) CGPoint startPoint; //触摸起始点
 @property (nonatomic, assign) CGPoint endPoint; //触摸结束点
@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, VCShowType) {
 
 @end
 
-@implementation FloatingView
+@implementation VCPickerFloatingView
 // 初始化
 - (instancetype)initWithFrame:(CGRect)frame{
     frame.size.width = kFloatingLength;
@@ -380,7 +380,7 @@ static NSString *const kErrorKey = @"kErrorKey";
 /**
  *  floating view 悬浮球
  */
-static FloatingView *vcpicker_floatingView = nil;
+static VCPickerFloatingView *vcpicker_floatingView = nil;
 
 /**
  *  class prefixes array 类名前缀
@@ -403,7 +403,7 @@ static BOOL vcpicker_needTitle = NO;
 
 static NSString *const vcpicker_searchHistoryKey = @"vcpicker.searchHistoryKey";
 
-@interface VCPicker () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface VCPickerViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     /**
      *  temp searched results 临时搜索到的数组
@@ -421,7 +421,7 @@ static NSString *const vcpicker_searchHistoryKey = @"vcpicker.searchHistoryKey";
 
 @end
 
-@implementation VCPicker
+@implementation VCPickerViewController
 #pragma mark - Life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -445,7 +445,7 @@ static NSString *const vcpicker_searchHistoryKey = @"vcpicker.searchHistoryKey";
     [super viewDidAppear:animated];
     
     [self findAndShowControllers];
-    [VCPicker setCircleHidden:YES];
+    [VCPickerViewController setCircleHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -680,12 +680,12 @@ static NSString *const vcpicker_searchHistoryKey = @"vcpicker.searchHistoryKey";
     __weak typeof(self) weakSelf = self;
     cell.presentClick = ^{
         __strong typeof(self) self = weakSelf;
-        [self saveAndShowController:classInfo showType:VCShowTypePresent];
+        [self saveAndShowController:classInfo showType:VCPickerShowTypePresent];
     };
     
     cell.presentNaviClick = ^{
         __strong typeof(self) self = weakSelf;
-        [self saveAndShowController:classInfo showType:VCShowTypePresentNavi];
+        [self saveAndShowController:classInfo showType:VCPickerShowTypePresentNavi];
     };
     
     cell.presentErrorClick = ^(NSString *title, NSString *msg) {
@@ -729,10 +729,10 @@ static NSString *const vcpicker_searchHistoryKey = @"vcpicker.searchHistoryKey";
     NSArray *dataArray = indexPath.section ? _tempArray : _historyArray;
     NSDictionary *classInfo = dataArray[indexPath.row];
     
-    [self saveAndShowController:classInfo showType:VCShowTypePresentNavi];
+    [self saveAndShowController:classInfo showType:VCPickerShowTypePresentNavi];
 }
 
-- (void)saveAndShowController:(NSDictionary *)controllerInfo showType:(VCShowType)showType {
+- (void)saveAndShowController:(NSDictionary *)controllerInfo showType:(VCPickerShowType)showType {
     [self addHistoryRecord:controllerInfo];
     
     [self dismissViewControllerAnimated:YES completion:^{
@@ -842,11 +842,11 @@ static NSString *const vcpicker_searchHistoryKey = @"vcpicker.searchHistoryKey";
         vcpicker_exceptArray = exceptArray;
         
         CGRect frame = CGRectMake(CGRectGetWidth(keyWindow.frame) - kFloatingLength, 150, kFloatingLength, kFloatingLength);
-        vcpicker_floatingView = [[FloatingView alloc] initWithFrame:frame];
+        vcpicker_floatingView = [[VCPickerFloatingView alloc] initWithFrame:frame];
         vcpicker_floatingView.backgroundColor = [UIColor clearColor];
         vcpicker_floatingView.floatingBlock = ^{
-            [VCPicker setCircleHidden:YES];
-            [VCPicker show];
+            [VCPickerViewController setCircleHidden:YES];
+            [VCPickerViewController show];
         };
     }
     
@@ -896,7 +896,7 @@ static NSString *const vcpicker_searchHistoryKey = @"vcpicker.searchHistoryKey";
  *
  *  @param showType 显示类型
  */
-- (void)showViewController:(NSString *)controllerName showType:(VCShowType)showType
+- (void)showViewController:(NSString *)controllerName showType:(VCPickerShowType)showType
 {
     Class clz = NSClassFromString(controllerName);
     if ([clz respondsToSelector:@selector(vcpicker_customShow)]) {
@@ -907,7 +907,7 @@ static NSString *const vcpicker_searchHistoryKey = @"vcpicker.searchHistoryKey";
     UIViewController *controller = [self makeInstanceWithClass:clz];
     
     switch (showType) {
-        case VCShowTypePush: {
+        case VCPickerShowTypePush: {
             UIViewController *rootVC = [[self class] getMainWindow].rootViewController;
             
             if ([rootVC isKindOfClass:[UITabBarController class]]) {
@@ -930,13 +930,13 @@ static NSString *const vcpicker_searchHistoryKey = @"vcpicker.searchHistoryKey";
             break;
         }
             
-        case VCShowTypePresent: {
+        case VCPickerShowTypePresent: {
             UIViewController *rootVC = [[self class] getMainWindow].rootViewController;
             [rootVC presentViewController:controller animated:YES completion:nil];
             break;
         }
             
-        case VCShowTypePresentNavi: {
+        case VCPickerShowTypePresentNavi: {
             UIViewController *rootVC = [[self class] getMainWindow].rootViewController;
             UIViewController *tobePresent = nil;
             if ([controller isKindOfClass:UINavigationController.class]) {
@@ -1117,16 +1117,16 @@ static NSString *const vcpicker_searchHistoryKey = @"vcpicker.searchHistoryKey";
 - (void)swizzle_makeKeyAndVisiable {
     [self swizzle_makeKeyAndVisiable];
     
-    if (self == [VCPicker getMainWindow]) {
-        [VCPicker showFinderWithClassPrefix:vcpicker_exceptArray except:vcpicker_exceptArray];
+    if (self == [VCPickerViewController getMainWindow]) {
+        [VCPickerViewController showFinderWithClassPrefix:vcpicker_exceptArray except:vcpicker_exceptArray];
     }
 }
 
 - (void)swizzle_setRootViewController:(UIViewController *)rootViewController {
     [self swizzle_setRootViewController:rootViewController];
     
-    if (self == [VCPicker getMainWindow]) {
-        [VCPicker showFinderWithClassPrefix:vcpicker_exceptArray except:vcpicker_exceptArray];
+    if (self == [VCPickerViewController getMainWindow]) {
+        [VCPickerViewController showFinderWithClassPrefix:vcpicker_exceptArray except:vcpicker_exceptArray];
     }
 }
 
