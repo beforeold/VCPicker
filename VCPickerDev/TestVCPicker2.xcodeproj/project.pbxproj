@@ -7,17 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94C2846528B693AD00DA9C4E /* VCPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C2846428B693AD00DA9C4E /* VCPicker.m */; };
 		BCDB7B7C1DD41F82000E4030 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDB7B7B1DD41F82000E4030 /* main.m */; };
 		BCDB7B7F1DD41F82000E4030 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDB7B7E1DD41F82000E4030 /* AppDelegate.m */; };
 		BCDB7B821DD41F82000E4030 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDB7B811DD41F82000E4030 /* ViewController.m */; };
 		BCDB7B851DD41F82000E4030 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCDB7B831DD41F82000E4030 /* Main.storyboard */; };
 		BCDB7B871DD41F83000E4030 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCDB7B861DD41F83000E4030 /* Assets.xcassets */; };
 		BCDB7B8A1DD41F83000E4030 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCDB7B881DD41F83000E4030 /* LaunchScreen.storyboard */; };
-		BCDB7B931DD41FAA000E4030 /* VCPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDB7B921DD41FAA000E4030 /* VCPicker.m */; };
 		BCDB7B961DD42712000E4030 /* MYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDB7B951DD42712000E4030 /* MYViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		94C2846328B693AD00DA9C4E /* VCPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCPicker.h; sourceTree = "<group>"; };
+		94C2846428B693AD00DA9C4E /* VCPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCPicker.m; sourceTree = "<group>"; };
 		BCDB7B771DD41F82000E4030 /* TestVCPicker2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestVCPicker2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCDB7B7B1DD41F82000E4030 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BCDB7B7D1DD41F82000E4030 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -28,8 +30,6 @@
 		BCDB7B861DD41F83000E4030 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCDB7B891DD41F83000E4030 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BCDB7B8B1DD41F83000E4030 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BCDB7B911DD41FAA000E4030 /* VCPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCPicker.h; sourceTree = "<group>"; };
-		BCDB7B921DD41FAA000E4030 /* VCPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCPicker.m; sourceTree = "<group>"; };
 		BCDB7B941DD42712000E4030 /* MYViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYViewController.h; sourceTree = "<group>"; };
 		BCDB7B951DD42712000E4030 /* MYViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -45,9 +45,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		94C2846128B693AD00DA9C4E /* VCPicker */ = {
+			isa = PBXGroup;
+			children = (
+				94C2846228B693AD00DA9C4E /* sources */,
+			);
+			name = VCPicker;
+			path = ../VCPicker;
+			sourceTree = "<group>";
+		};
+		94C2846228B693AD00DA9C4E /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				94C2846328B693AD00DA9C4E /* VCPicker.h */,
+				94C2846428B693AD00DA9C4E /* VCPicker.m */,
+			);
+			path = sources;
+			sourceTree = "<group>";
+		};
 		BCDB7B6E1DD41F82000E4030 = {
 			isa = PBXGroup;
 			children = (
+				94C2846128B693AD00DA9C4E /* VCPicker */,
 				BCDB7B791DD41F82000E4030 /* TestVCPicker2 */,
 				BCDB7B781DD41F82000E4030 /* Products */,
 			);
@@ -64,8 +83,6 @@
 		BCDB7B791DD41F82000E4030 /* TestVCPicker2 */ = {
 			isa = PBXGroup;
 			children = (
-				BCDB7B911DD41FAA000E4030 /* VCPicker.h */,
-				BCDB7B921DD41FAA000E4030 /* VCPicker.m */,
 				BCDB7B7D1DD41F82000E4030 /* AppDelegate.h */,
 				BCDB7B7E1DD41F82000E4030 /* AppDelegate.m */,
 				BCDB7B801DD41F82000E4030 /* ViewController.h */,
@@ -115,7 +132,7 @@
 		BCDB7B6F1DD41F82000E4030 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 1340;
 				ORGANIZATIONNAME = Yundi;
 				TargetAttributes = {
 					BCDB7B761DD41F82000E4030 = {
@@ -127,10 +144,9 @@
 			};
 			buildConfigurationList = BCDB7B721DD41F82000E4030 /* Build configuration list for PBXProject "TestVCPicker2" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -162,7 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCDB7B931DD41FAA000E4030 /* VCPicker.m in Sources */,
+				94C2846528B693AD00DA9C4E /* VCPicker.m in Sources */,
 				BCDB7B821DD41F82000E4030 /* ViewController.m in Sources */,
 				BCDB7B7F1DD41F82000E4030 /* AppDelegate.m in Sources */,
 				BCDB7B7C1DD41F82000E4030 /* main.m in Sources */,
@@ -201,15 +217,25 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -232,7 +258,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -248,15 +274,25 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -273,7 +309,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -286,7 +322,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = WS8S43M437;
 				INFOPLIST_FILE = TestVCPicker2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.br.vcpicker.example;
@@ -300,7 +336,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = WS8S43M437;
 				INFOPLIST_FILE = TestVCPicker2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.br.vcpicker.example;
