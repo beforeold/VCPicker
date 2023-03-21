@@ -1,11 +1,19 @@
 
 
-> 如需运行 demo，可直接 clone 或下载后打开 TestVCPicker2 工程
+> 如需运行 demo，可直接 clone 或下载后打开 VCPickerDev 文件夹下的工程
 
 
 # VCPicker
 
 Find and navi to your controller fast
+
+How to use?
+// add the code below in the appDidFinishLaunch method, with your class prefix
+
+```Obbjective-C
+ // it's recommended to pass a class prefix array to ignore unused classes
+[VCPickerViewController activateWhenDebugWithClassPrefixes:@[@"your_class_prefix"]];
+```
 
 also see the article 
 [开发利器：控制器传送门（已通过半年使用和上线验证，附demo）](http://www.jianshu.com/p/60357c77a9ed)

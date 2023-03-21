@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    // [VCPickerViewController activateWithClassPrefixesWhenDebug:@[@"MY"]];
+    // it's recommended to pass a class prefix array to ignore unused classes
     [VCPickerViewController activateWhenDebugWithClassPrefixes:@[@"MY"]];
     
     return YES;
