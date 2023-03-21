@@ -7,8 +7,8 @@
 
 Find and navi to your controller fast
 
-How to use?
-// add the code below in the appDidFinishLaunch method, with your class prefix
+# How to use?
+add the code below in the appDidFinishLaunch method, with your class prefix
 
 ```Obbjective-C
  // it's recommended to pass a class prefix array to ignore unused classes
